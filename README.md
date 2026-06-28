@@ -184,7 +184,7 @@ src/
 
 | Repo | Description |
 |------|-------------|
-| **[GameZone Server](your-server-repo-url-here)** | Express.js REST API — Better Auth, MongoDB, facility & booking CRUD |
+| **[GameZone Server](your-server-rhttps://github.com/shariful-ire/game-zone-serverepo-url-here)** | Express.js REST API — Better Auth, MongoDB, facility & booking CRUD |
 
 ---
 

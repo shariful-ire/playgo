@@ -1,16 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { RiGoogleFill } from "react-icons/ri";
 import PageTransition from "@/components/layout/PageTransition";
 import { Button, FormField } from "@/components/ui";
 import { signIn } from "@/lib/auth-client";
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/";
   const [form, setForm] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -40,7 +42,7 @@ export default function LoginPage() {
       });
       if (error) throw new Error(error.message || "Invalid credentials");
       toast.success("Login successful!");
-      router.push("/");
+      router.push(redirectTo);
     } catch (err) {
       toast.error(err.message || "Login failed");
     } finally {
@@ -49,9 +51,72 @@ export default function LoginPage() {
   }
 
   async function handleGoogleLogin() {
-    await signIn.social({ provider: "google", callbackURL: "/" });
+    await signIn.social({ provider: "google", callbackURL: redirectTo });
   }
 
+  return (
+    <div className="w-full max-w-md bg-base-100/95 backdrop-blur-sm rounded-2xl border border-base-content/5 p-6 md:p-8 shadow-2xl shadow-black/20">
+      <div className="text-center mb-8">
+        <h1 className="text-2xl!">Welcome Back</h1>
+        <p className="text-sm text-base-content/50 mt-1">
+          Sign in to book your next game
+        </p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <FormField
+          label="Email"
+          name="email"
+          type="email"
+          placeholder="you@example.com"
+          value={form.email}
+          onChange={(e) => update("email", e.target.value)}
+          error={errors.email}
+        />
+        <FormField
+          label="Password"
+          name="password"
+          type="password"
+          placeholder="Enter your password"
+          value={form.password}
+          onChange={(e) => update("password", e.target.value)}
+          error={errors.password}
+        />
+        <Button
+          variant="accent"
+          className="w-full mt-2"
+          type="submit"
+          disabled={loading}
+        >
+          {loading ? (
+            <span className="loading loading-spinner loading-sm" />
+          ) : (
+            "Login"
+          )}
+        </Button>
+      </form>
+
+      <div className="divider text-base-content/30 text-xs my-6">OR</div>
+
+      <button
+        onClick={handleGoogleLogin}
+        className="btn btn-outline w-full rounded-2xl gap-2 text-base-content/70 hover:text-base-content"
+      >
+        <RiGoogleFill className="text-lg" />
+        Continue with Google
+      </button>
+
+      <p className="text-sm text-center text-base-content/50 mt-6">
+        Don&apos;t have an account?{" "}
+        <Link href="/register" className="text-primary hover:underline font-medium">
+          Register
+        </Link>
+      </p>
+    </div>
+  );
+}
+
+export default function LoginPage() {
   return (
     <PageTransition className="flex-1 flex items-center justify-center px-4 py-12">
       <div
@@ -64,67 +129,13 @@ export default function LoginPage() {
           filter: "blur(8px)",
         }}
       />
-
-      <div className="w-full max-w-md bg-base-100/95 backdrop-blur-sm rounded-2xl border border-base-content/5 p-6 md:p-8 shadow-2xl shadow-black/20">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl!">Welcome Back</h1>
-          <p className="text-sm text-base-content/50 mt-1">
-            Sign in to book your next game
-          </p>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <FormField
-            label="Email"
-            name="email"
-            type="email"
-            placeholder="you@example.com"
-            value={form.email}
-            onChange={(e) => update("email", e.target.value)}
-            error={errors.email}
-          />
-
-          <FormField
-            label="Password"
-            name="password"
-            type="password"
-            placeholder="Enter your password"
-            value={form.password}
-            onChange={(e) => update("password", e.target.value)}
-            error={errors.password}
-          />
-
-          <Button
-            variant="accent"
-            className="w-full mt-2"
-            type="submit"
-            disabled={loading}
-          >
-            {loading ? (
-              <span className="loading loading-spinner loading-sm" />
-            ) : (
-              "Login"
-            )}
-          </Button>
-        </form>
-
-        <div className="divider text-base-content/30 text-xs my-6">OR</div>
-
-        <button
-          onClick={handleGoogleLogin}
-          className="btn btn-outline w-full rounded-2xl gap-2 text-base-content/70 hover:text-base-content"
-        >
-          <RiGoogleFill className="text-lg" />
-          Continue with Google
-        </button>
-
-        <p className="text-sm text-center text-base-content/50 mt-6">
-          Don&apos;t have an account?{" "}
-          <Link href="/register" className="text-primary hover:underline font-medium">
-            Register
-          </Link>
-        </p>
-      </div>
+      <Suspense
+        fallback={
+          <div className="w-full max-w-md h-96 bg-base-200 rounded-2xl animate-pulse" />
+        }
+      >
+        <LoginForm />
+      </Suspense>
     </PageTransition>
   );
 }

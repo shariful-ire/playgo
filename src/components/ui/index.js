@@ -9,3 +9,5 @@ export { default as StatCounter } from "./StatCounter";
 export { default as FilterBar } from "./FilterBar";
 export { default as ImageGallery } from "./ImageGallery";
 export { default as BookingPanel } from "./BookingPanel";
+export { default as ConfirmModal } from "./ConfirmModal";
+export { default as ImageUploader } from "./ImageUploader";

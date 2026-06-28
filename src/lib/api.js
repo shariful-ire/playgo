@@ -1,4 +1,4 @@
-import { MOCK_FACILITIES } from "./mockData";
+import { MOCK_FACILITIES, MOCK_BOOKINGS } from "./mockData";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
 
@@ -68,7 +68,11 @@ export async function createBooking(data) {
 }
 
 export async function fetchMyBookings() {
-  return apiFetch("/bookings");
+  try {
+    return await apiFetch("/bookings");
+  } catch {
+    return [...MOCK_BOOKINGS];
+  }
 }
 
 export async function cancelBooking(id) {

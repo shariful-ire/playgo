@@ -67,7 +67,14 @@ export default function RegisterPage() {
   }
 
   async function handleGoogleLogin() {
-    await signIn.social({ provider: "google", callbackURL: "/" });
+    try {
+      await signIn.social({
+        provider: "google",
+        callbackURL: `${window.location.origin}/`,
+      });
+    } catch (err) {
+      toast.error(err.message || "Google login failed");
+    }
   }
 
   return (

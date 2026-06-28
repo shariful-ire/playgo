@@ -51,7 +51,14 @@ function LoginForm() {
   }
 
   async function handleGoogleLogin() {
-    await signIn.social({ provider: "google", callbackURL: redirectTo });
+    try {
+      await signIn.social({
+        provider: "google",
+        callbackURL: `${window.location.origin}${redirectTo}`,
+      });
+    } catch (err) {
+      toast.error(err.message || "Google login failed");
+    }
   }
 
   return (

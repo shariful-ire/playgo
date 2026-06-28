@@ -13,8 +13,9 @@ export default function ImageUploader({ value, onChange }) {
     const apiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
 
     if (!apiKey) {
-      const url = URL.createObjectURL(file);
-      onChange(url);
+      const reader = new FileReader();
+      reader.onload = () => onChange(reader.result);
+      reader.readAsDataURL(file);
       return;
     }
 

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { RiInstagramLine, RiFacebookCircleLine } from "react-icons/ri";
+import { RiGithubFill, RiLinkedinBoxFill } from "react-icons/ri";
 
 function XIcon({ className = "" }) {
   return (
@@ -48,14 +48,14 @@ const SPORT_TYPES = [
 ];
 
 const SOCIALS = [
-  { label: "X", icon: XIcon, href: "https://x.com" },
-  { label: "Instagram", icon: RiInstagramLine, href: "https://instagram.com" },
-  { label: "Facebook", icon: RiFacebookCircleLine, href: "https://facebook.com" },
+  { label: "GitHub", icon: RiGithubFill, href: "https://github.com/shariful-ire" },
+  { label: "LinkedIn", icon: RiLinkedinBoxFill, href: "https://www.linkedin.com/in/shariful-ire" },
+  { label: "X", icon: XIcon, href: "https://x.com/shariful_ire" },
 ];
 
 function FooterColumn({ title, children }) {
   return (
-    <div className="collapse collapse-arrow md:collapse-open bg-transparent border-b border-base-content/10 md:border-0 rounded-none">
+    <div className="collapse collapse-arrow md:collapse-open bg-transparent border-b border-gz-line-marker/10 md:border-0 rounded-none">
       <input type="checkbox" className="md:hidden min-h-0 peer" />
       <div className="collapse-title text-sm font-heading font-semibold text-gz-line-marker tracking-wide uppercase min-h-0 px-0 py-3 md:py-0 md:mb-4 md:cursor-default">
         {title}
@@ -69,18 +69,18 @@ function FooterColumn({ title, children }) {
 
 export default function Footer() {
   return (
-    <footer className="bg-gz-charcoal-950 border-t border-base-content/5 mt-auto">
+    <footer className="bg-gz-charcoal-950 border-t border-gz-line-marker/10 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-0 md:gap-10">
           {/* Brand Column */}
-          <div className="pb-6 md:pb-0 border-b border-base-content/10 md:border-0 mb-0 md:mb-0">
+          <div className="pb-6 md:pb-0 border-b border-gz-line-marker/10 md:border-0 mb-0 md:mb-0">
             <Link href="/" className="flex items-center gap-2.5 mb-4">
               <LogoIcon className="w-7 h-7 text-primary" />
               <span className="font-heading font-bold text-lg text-gz-line-marker tracking-tight">
                 Game<span className="text-primary">Zone</span>
               </span>
             </Link>
-            <p className="text-sm text-base-content/50 leading-relaxed max-w-xs">
+            <p className="text-sm text-gz-line-marker/50 leading-relaxed max-w-xs">
               Book premium sports facilities near you. From turf grounds to
               tennis courts — find your game, pick your time, and play.
             </p>
@@ -108,7 +108,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-base-content/50 hover:text-primary transition-colors"
+                    className="text-sm text-gz-line-marker/50 hover:text-primary transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -124,7 +124,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-base-content/50 hover:text-primary transition-colors"
+                    className="text-sm text-gz-line-marker/50 hover:text-primary transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -135,27 +135,29 @@ export default function Footer() {
 
           {/* Contact */}
           <FooterColumn title="Contact">
-            <ul className="space-y-2.5 text-sm text-base-content/50">
+            <ul className="space-y-2.5 text-sm text-gz-line-marker/50">
               <li>
-                <span className="text-base-content/30">Email:</span>{" "}
+                <span className="text-gz-line-marker/30">Email:</span>{" "}
                 <a
-                  href="mailto:support@gamezone.com"
+                  href="mailto:shariful.ire@gmail.com"
                   className="hover:text-primary transition-colors"
                 >
-                  support@gamezone.com
+                  shariful.ire@gmail.com
                 </a>
               </li>
               <li>
-                <span className="text-base-content/30">Phone:</span>{" "}
+                <span className="text-gz-line-marker/30">GitHub:</span>{" "}
                 <a
-                  href="tel:+8801700000000"
+                  href="https://github.com/shariful-ire"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:text-primary transition-colors"
                 >
-                  +880 1700-000000
+                  shariful-ire
                 </a>
               </li>
               <li>
-                <span className="text-base-content/30">Address:</span>{" "}
+                <span className="text-gz-line-marker/30">Location:</span>{" "}
                 Dhaka, Bangladesh
               </li>
             </ul>
@@ -164,12 +166,12 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-base-content/5">
+      <div className="border-t border-gz-line-marker/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-xs text-base-content/30">
+          <p className="text-xs text-gz-line-marker/30">
             &copy; {new Date().getFullYear()} GameZone. All rights reserved.
           </p>
-          <p className="text-xs text-base-content/30">
+          <p className="text-xs text-gz-line-marker/30">
             Built for the love of the game.
           </p>
         </div>

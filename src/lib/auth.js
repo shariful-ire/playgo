@@ -5,11 +5,13 @@ import { client } from "./mongodb";
 
 const db = client.db("gamezone");
 
+const appUrl =
+  process.env.BETTER_AUTH_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+
 export const auth = betterAuth({
-  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
-  trustedOrigins: [
-    process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
-  ].filter(Boolean),
+  baseURL: appUrl,
+  trustedOrigins: [appUrl].filter(Boolean),
   database: mongodbAdapter(db, { transaction: false }),
   account: {
     accountLinking: {

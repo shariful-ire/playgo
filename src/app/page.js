@@ -1,9 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { Button, FormField, StatusBadge, EmptyState } from "@/components/ui";
+import { RiSearchLine, RiMapPinLine } from "react-icons/ri";
 
 export default function Home() {
   const [theme, setTheme] = useState("gamezone-dark");
+  const [formValues, setFormValues] = useState({ name: "", email: "" });
+  const [formErrors, setFormErrors] = useState({});
 
   function toggleTheme() {
     const next =
@@ -12,17 +16,21 @@ export default function Home() {
     document.documentElement.setAttribute("data-theme", next);
   }
 
+  function handleValidate() {
+    const errors = {};
+    if (!formValues.name) errors.name = "Facility name is required";
+    if (!formValues.email) errors.email = "A valid email is required";
+    setFormErrors(errors);
+  }
+
   return (
     <main className="flex flex-col flex-1 items-center px-4 py-12 md:py-20 gap-12 max-w-5xl mx-auto w-full">
       {/* Theme Toggle */}
       <div className="flex items-center gap-4 self-end">
         <span className="text-sm text-base-content/60">{theme}</span>
-        <button
-          onClick={toggleTheme}
-          className="btn btn-sm btn-outline btn-primary rounded-2xl"
-        >
+        <Button variant="ghost" size="sm" onClick={toggleTheme}>
           Toggle Theme
-        </button>
+        </Button>
       </div>
 
       {/* Typography Scale */}
@@ -46,100 +54,150 @@ export default function Home() {
             Small / Secondary — Last booked 3 hours ago
           </p>
           <p className="font-numeric text-4xl font-bold tracking-tight">
-            ৳2,450 <span className="text-lg font-normal text-base-content/50">/hr</span>
+            ৳2,450{" "}
+            <span className="text-lg font-normal text-base-content/50">
+              /hr
+            </span>
           </p>
-        </div>
-      </section>
-
-      {/* Color Palette */}
-      <section className="w-full space-y-6">
-        <h2 className="border-b border-base-300 pb-2">DaisyUI Theme Colors</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {[
-            ["Primary", "bg-primary", "text-primary-content"],
-            ["Secondary", "bg-secondary", "text-secondary-content"],
-            ["Accent", "bg-accent", "text-accent-content"],
-            ["Neutral", "bg-neutral", "text-neutral-content"],
-            ["Base 100", "bg-base-100", "text-base-content"],
-            ["Base 200", "bg-base-200", "text-base-content"],
-            ["Base 300", "bg-base-300", "text-base-content"],
-            ["Success", "bg-success", "text-success-content"],
-            ["Warning", "bg-warning", "text-warning-content"],
-            ["Error", "bg-error", "text-error-content"],
-            ["Info", "bg-info", "text-info-content"],
-          ].map(([label, bg, text]) => (
-            <div
-              key={label}
-              className={`${bg} ${text} rounded-2xl p-4 text-sm font-medium`}
-            >
-              {label}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Custom gz- Palette */}
-      <section className="w-full space-y-6">
-        <h2 className="border-b border-base-300 pb-2">
-          GameZone Custom Tokens
-        </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {[
-            ["Charcoal 950", "bg-gz-charcoal-950", "text-white"],
-            ["Charcoal 900", "bg-gz-charcoal-900", "text-white"],
-            ["Surface 800", "bg-gz-surface-800", "text-white"],
-            ["Turf 700", "bg-gz-turf-700", "text-white"],
-            ["Turf 500", "bg-gz-turf-500", "text-white"],
-            ["Turf 300", "bg-gz-turf-300", "text-black"],
-            ["Accent 500", "bg-gz-accent-500", "text-white"],
-            ["Accent 400", "bg-gz-accent-400", "text-black"],
-            ["Line Marker", "bg-gz-line-marker", "text-black"],
-            ["Neutral 200", "bg-gz-neutral-200", "text-black"],
-            ["Neutral 500", "bg-gz-neutral-500", "text-white"],
-            ["Danger", "bg-gz-danger", "text-white"],
-            ["Warning", "bg-gz-warning", "text-black"],
-          ].map(([label, bg, text]) => (
-            <div
-              key={label}
-              className={`${bg} ${text} rounded-2xl p-4 text-sm font-medium`}
-            >
-              {label}
-            </div>
-          ))}
         </div>
       </section>
 
       {/* Buttons */}
       <section className="w-full space-y-6">
-        <h2 className="border-b border-base-300 pb-2">Button Variants</h2>
-        <div className="flex flex-wrap gap-4">
-          <button className="btn btn-accent text-accent-content rounded-2xl">
-            Book Now
-          </button>
-          <button className="btn btn-primary rounded-2xl">Primary</button>
-          <button className="btn btn-outline btn-primary rounded-2xl">
-            Ghost / Outline
-          </button>
-          <button className="btn btn-secondary rounded-2xl">Secondary</button>
-          <button className="btn btn-error text-error-content rounded-2xl">
-            Cancel
-          </button>
+        <h2 className="border-b border-base-300 pb-2">Button Component</h2>
+        <div className="flex flex-wrap gap-4 items-center">
+          <Button variant="accent">Book Now</Button>
+          <Button variant="primary">Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="ghost">Ghost / Outline</Button>
+          <Button variant="danger">Cancel</Button>
+        </div>
+        <div className="flex flex-wrap gap-4 items-center">
+          <Button variant="accent" size="sm">Small</Button>
+          <Button variant="accent" size="md">Medium</Button>
+          <Button variant="accent" size="lg">Large</Button>
+          <Button variant="primary" disabled>Disabled</Button>
         </div>
       </section>
 
-      {/* Badges */}
+      {/* FormField */}
       <section className="w-full space-y-6">
-        <h2 className="border-b border-base-300 pb-2">Status Badges</h2>
-        <div className="flex flex-wrap gap-4">
-          <div className="badge badge-warning gap-1 rounded-full px-3 py-2">
-            Pending
-          </div>
-          <div className="badge badge-success gap-1 rounded-full px-3 py-2">
-            Confirmed
-          </div>
-          <div className="badge badge-error gap-1 rounded-full px-3 py-2">
-            Cancelled
-          </div>
+        <h2 className="border-b border-base-300 pb-2">FormField Component</h2>
+        <div className="max-w-md space-y-4">
+          <FormField
+            label="Facility Name"
+            name="name"
+            placeholder="Enter facility name"
+            value={formValues.name}
+            onChange={(e) =>
+              setFormValues((v) => ({ ...v, name: e.target.value }))
+            }
+            error={formErrors.name}
+          />
+          <FormField
+            label="Owner Email"
+            name="email"
+            type="email"
+            placeholder="owner@example.com"
+            value={formValues.email}
+            onChange={(e) =>
+              setFormValues((v) => ({ ...v, email: e.target.value }))
+            }
+            error={formErrors.email}
+          />
+          <FormField
+            label="Description"
+            name="description"
+            textarea
+            placeholder="Describe your facility..."
+            rows={3}
+          />
+          <FormField label="Location" name="location">
+            <select
+              name="location"
+              className="w-full select rounded-2xl bg-base-200"
+              defaultValue=""
+            >
+              <option value="" disabled>Select a city</option>
+              <option>Dhaka</option>
+              <option>Chittagong</option>
+              <option>Sylhet</option>
+            </select>
+          </FormField>
+          <Button variant="accent" size="sm" onClick={handleValidate}>
+            Test Validation
+          </Button>
+        </div>
+      </section>
+
+      {/* StatusBadge */}
+      <section className="w-full space-y-6">
+        <h2 className="border-b border-base-300 pb-2">
+          StatusBadge Component
+        </h2>
+        <div className="flex flex-wrap gap-4 items-center">
+          <StatusBadge status="pending" />
+          <StatusBadge status="confirmed" />
+          <StatusBadge status="cancelled" />
+        </div>
+      </section>
+
+      {/* EmptyState */}
+      <section className="w-full space-y-6">
+        <h2 className="border-b border-base-300 pb-2">
+          EmptyState Component
+        </h2>
+        <div className="bg-base-200 rounded-2xl">
+          <EmptyState
+            title="No bookings yet"
+            message="You haven't booked any facility yet. Start exploring and book your first game!"
+            actionLabel="Explore Facilities"
+            actionHref="/facilities"
+          />
+        </div>
+        <div className="bg-base-200 rounded-2xl">
+          <EmptyState
+            icon={RiSearchLine}
+            title="No results found"
+            message="Try adjusting your filters or search for something different."
+          />
+        </div>
+        <div className="bg-base-200 rounded-2xl">
+          <EmptyState
+            icon={RiMapPinLine}
+            title="No facilities listed"
+            message="You haven't added any facilities yet. List your first one and start getting bookings!"
+            actionLabel="Add Facility"
+            actionHref="/add-facility"
+          />
+        </div>
+      </section>
+
+      {/* Color Palette (compact) */}
+      <section className="w-full space-y-6">
+        <h2 className="border-b border-base-300 pb-2">Theme Colors</h2>
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+          {[
+            ["Primary", "bg-primary text-primary-content"],
+            ["Secondary", "bg-secondary text-secondary-content"],
+            ["Accent", "bg-accent text-accent-content"],
+            ["Success", "bg-success text-success-content"],
+            ["Warning", "bg-warning text-warning-content"],
+            ["Error", "bg-error text-error-content"],
+            ["Base 100", "bg-base-100 text-base-content"],
+            ["Base 200", "bg-base-200 text-base-content"],
+            ["Base 300", "bg-base-300 text-base-content"],
+            ["Neutral", "bg-neutral text-neutral-content"],
+            ["Turf 700", "bg-gz-turf-700 text-white"],
+            ["Accent 400", "bg-gz-accent-400 text-black"],
+          ].map(([label, cls]) => (
+            <div
+              key={label}
+              className={`${cls} rounded-2xl p-3 text-xs font-medium text-center`}
+            >
+              {label}
+            </div>
+          ))}
         </div>
       </section>
     </main>

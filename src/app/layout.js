@@ -1,6 +1,7 @@
 import { Sora, Inter, Space_Grotesk } from "next/font/google";
 import { Toaster } from "sonner";
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import "./globals.css";
 
 const sora = Sora({
@@ -40,6 +41,7 @@ export default function RootLayout({ children }) {
       <body className="min-h-screen flex flex-col antialiased">
         <Navbar />
         {children}
+        <Footer />
         <Toaster
           position="top-right"
           toastOptions={{

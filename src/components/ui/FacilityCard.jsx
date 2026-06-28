@@ -61,7 +61,7 @@ export default function FacilityCard({ facility, showManage = false }) {
 
       {/* Content */}
       <div className="p-4 flex flex-col flex-1 gap-2">
-        <h3 className="!text-base font-semibold text-base-content line-clamp-1">
+        <h3 className="text-base! font-semibold text-base-content line-clamp-1">
           {name}
         </h3>
 

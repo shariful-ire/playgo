@@ -12,6 +12,8 @@ import {
   RiLogoutBoxRLine,
 } from "react-icons/ri";
 import Button from "@/components/ui/Button";
+import { useAuth } from "@/lib/AuthProvider";
+import { signOut } from "@/lib/auth-client";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -24,7 +26,6 @@ const PRIVATE_LINKS = [
   { label: "Manage Facilities", href: "/manage-facilities", icon: RiSettings3Line },
 ];
 
-const MOCK_USER = null;
 
 function LogoIcon({ className = "" }) {
   return (
@@ -270,11 +271,11 @@ function MobileDrawer({ isOpen, onClose, user, onLogout }) {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const { user } = useAuth();
 
-  const user = MOCK_USER;
-
-  function handleLogout() {
-    console.log("Logout clicked");
+  async function handleLogout() {
+    await signOut();
+    window.location.href = "/";
   }
 
   useEffect(() => {
@@ -394,4 +395,4 @@ export default function Navbar() {
   );
 }
 
-export { NAV_LINKS, PRIVATE_LINKS, MOCK_USER };
+export { NAV_LINKS, PRIVATE_LINKS };

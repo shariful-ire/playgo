@@ -1,5 +1,6 @@
 import { Sora, Inter, Space_Grotesk } from "next/font/google";
 import { Toaster } from "sonner";
+import { AuthProvider } from "@/lib/AuthProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
@@ -39,9 +40,11 @@ export default function RootLayout({ children }) {
       className={`${sora.variable} ${inter.variable} ${spaceGrotesk.variable}`}
     >
       <body className="min-h-screen flex flex-col antialiased">
-        <Navbar />
-        {children}
-        <Footer />
+        <AuthProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </AuthProvider>
         <Toaster
           position="top-right"
           toastOptions={{

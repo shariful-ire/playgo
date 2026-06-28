@@ -78,7 +78,7 @@ export default function HowItWorks() {
                 <span className="text-xs font-bold text-primary/50 uppercase tracking-widest mb-1">
                   Step {i + 1}
                 </span>
-                <h3 className="!text-lg mb-2">{step.title}</h3>
+                <h3 className="text-lg! mb-2">{step.title}</h3>
                 <p className="text-sm text-base-content/50 leading-relaxed">
                   {step.description}
                 </p>

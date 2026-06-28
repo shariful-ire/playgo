@@ -7,3 +7,5 @@ export { default as SkeletonRow } from "./SkeletonRow";
 export { default as FacilityCard } from "./FacilityCard";
 export { default as StatCounter } from "./StatCounter";
 export { default as FilterBar } from "./FilterBar";
+export { default as ImageGallery } from "./ImageGallery";
+export { default as BookingPanel } from "./BookingPanel";

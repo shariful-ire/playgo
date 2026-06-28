@@ -65,7 +65,7 @@ export default function Hero() {
 
           <motion.h1
             variants={fadeUp}
-            className="text-gz-line-marker mb-6 !text-4xl md:!text-6xl !leading-[1.1]"
+            className="text-gz-line-marker mb-6 text-4xl! md:text-6xl! leading-[1.1]!"
           >
             Your Game.{" "}
             <span className="text-primary">Your Time.</span>{" "}
@@ -88,7 +88,7 @@ export default function Hero() {
               </Button>
             </Link>
             <Link href="/add-facility">
-              <Button variant="ghost" size="lg" className="!border-gz-line-marker/20 !text-gz-line-marker hover:!bg-gz-line-marker/10">
+              <Button variant="ghost" size="lg" className="border-gz-line-marker/20! text-gz-line-marker! hover:bg-gz-line-marker/10!">
                 List Your Facility
               </Button>
             </Link>

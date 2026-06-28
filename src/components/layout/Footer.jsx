@@ -60,7 +60,7 @@ function FooterColumn({ title, children }) {
       <div className="collapse-title text-sm font-heading font-semibold text-gz-line-marker tracking-wide uppercase min-h-0 px-0 py-3 md:py-0 md:mb-4 md:cursor-default">
         {title}
       </div>
-      <div className="collapse-content px-0 md:!pb-0">
+      <div className="collapse-content px-0 md:pb-0!">
         {children}
       </div>
     </div>

@@ -5,3 +5,5 @@ export { default as EmptyState } from "./EmptyState";
 export { default as SkeletonCard } from "./SkeletonCard";
 export { default as SkeletonRow } from "./SkeletonRow";
 export { default as FacilityCard } from "./FacilityCard";
+export { default as StatCounter } from "./StatCounter";
+export { default as FilterBar } from "./FilterBar";
